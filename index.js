@@ -27,5 +27,15 @@ app.post('/api/users', async (req, res) => {
   }
 });
 
+// GET route to fetch all users
+app.get('/api/users', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json({ users });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users', error });
+  }
+});
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
